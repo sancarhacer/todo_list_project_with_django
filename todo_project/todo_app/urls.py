@@ -10,6 +10,8 @@ urlpatterns = [
     path('yes_finish/<Todos_id>', views.yes_finish, name ="yes_finish"),
     path('no_finish/<Todos_id>', views.no_finish, name ="no_finish"),
     path('update/<Todos_id>', views.update, name ="update"),
+    path('completed_todos/', views.completed_todos, name="completed_todos"),
+    path("uncompleted_todos/", views.uncompleted_todos, name="uncompleted_todos"),
 
 ]
 

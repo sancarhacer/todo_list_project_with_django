@@ -46,7 +46,11 @@ HOME PAGE
   </tbody>
 </table>
   <div class="text-center">
+      <a class="btn btn-success" href="{% url 'uncompleted_todos' %}"> Uncompleted Todos </a>
       <a class="btn btn-success" href="{% url 'create' %}"> Create To Do </a>
+      <a class="btn btn-success" href="{% url 'completed_todos' %}"> Completed Todos </a>
+
+
  </div>
 
 {% endblock content %}

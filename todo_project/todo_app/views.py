@@ -63,3 +63,10 @@ def update(request,Todos_id):
         todo_list = Todos.objects.all()
         return render(request,"todo_app/update.html",{'todo_list': todo_list})
 
+def completed_todos(request):
+    completed_todos = Todos.objects.filter(finished=True)
+    return render (request,"todo_app/completed.html",{"completed_todos": completed_todos})
+
+def uncompleted_todos(request):
+    uncompleted_todos = Todos.objects.filter(finished=False)
+    return render(request,"todo_app/uncompleted.html",{"uncompleted_todos": uncompleted_todos})
