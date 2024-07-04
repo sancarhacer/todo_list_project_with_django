@@ -1,0 +1,29 @@
+{% extends "todo_app/base.html" %}
+
+{% block title %}
+login
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container">
+        <h2>Login</h2>
+        <form  method="POST">
+            {% csrf_token %}
+            {% if error %}
+                <div class = "alert alert-danger">{{error}}</div>
+            
+            {% endif %}
+            <div class="mb-3">
+                <label for="username">username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password">password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+        <button type = "submit " class = "btn-primary"> Login</button>
+        </form>
+        
+    </div>
+{% endblock content %}  
