@@ -1,0 +1,62 @@
+{% extends "todo_app/base.html" %}
+
+{% block title %}
+subtask
+{% endblock title %}
+
+
+{{subtasks_list}}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Tasks</th>
+      <th scope="col">is Finished</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Update</th>
+
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+
+        {{todo_id}}   
+      {% for subtask in subtask_list %}
+        
+        {% if subtask.finished %}
+          <tr>
+          <td><del>{{subtask.title}} <p>{{subtask.todo.title}}</p> </del></td>
+          <td><a class="btn btn-danger" href= "#" role="button" > Yes</a></td>
+          <td>{{todo.date}}</td>
+          <td><a class="btn btn-danger" href= "#" role="button" > Delete</a></td>
+          <td><a class="btn btn-warning" href= "#" role="button" > Update</a></td>
+          </tr>
+        {% else %}
+          <tr>
+          <td>{{subtask.title}}</td>
+          <td><a class="btn btn-danger" href= "#" role="button" > No</a></td>
+          <td>{{todo.date}}</td>
+          <td><a class="btn btn-danger" href= "#" role="button" > Delete</a></td>
+          <td><a class="btn btn-warning" href= "#" role="button" > Update</a></td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+      
+    
+  </tbody>
+</table>
+  <div class="text-center">
+      <a class="btn btn-success" href="#"> Uncompleted Todos </a>
+      <a class="btn btn-success" href="{% url  'createTask' Todos_id %}"> Create Task </a>
+      <a class="btn btn-success" href="#"> Completed Todos </a>
+      <h1>{{subtask.todo.id}}</h1> 
+
+
+ </div>
+ 
+
+{% endblock content %}
+

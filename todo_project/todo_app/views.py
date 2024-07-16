@@ -11,23 +11,14 @@ def index(request):
                 form = ListForm(request.POST or None)
                 if form.is_valid:
                     form.save()
-
-
                     todo_list = Todos.objects.filter(user=request.user)
-
                     return render(request,"todo_app/index.html",{'todo_list': todo_list})
-
             else:
-
                 todo_list = Todos.objects.filter(user=request.user)
                 return render(request,"todo_app/index.html",{'todo_list': todo_list})
-
         else:
             return redirect('index')
-
-def about(request):
-    return render(request,"todo_app/about.html")
-
+        
 @login_required
 def create(request):
     if request.method == "POST":
@@ -37,10 +28,14 @@ def create(request):
             new_todo.user = request.user  # Kullanıcıyı atan todos oluşturuluyor.
             new_todo.save()
             todo_list = Todos.objects.filter(user=request.user)
-            return render(request, "todo_app/create.html", {'todo_list': todo_list})
+            return redirect('index')
     else:
         todo_list = Todos.objects.filter(user=request.user)
         return render(request, "todo_app/create.html", {'todo_list': todo_list})
+
+def about(request):
+    return render(request,"todo_app/about.html")
+
 def delete(request,Todos_id):
     todo = Todos.objects.get(pk=Todos_id)
     todo.delete()

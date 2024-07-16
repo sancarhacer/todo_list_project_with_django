@@ -9,7 +9,7 @@ from datetime import datetime
 # Create your models here.
 
 class Todos (models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null = False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True,blank = False)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000, blank = True)
     finished = models.BooleanField(default = False)

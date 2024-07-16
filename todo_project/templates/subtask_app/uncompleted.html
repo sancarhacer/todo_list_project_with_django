@@ -1,0 +1,21 @@
+{% extends "todo_app/base.html" %}
+
+{% block title %}
+uncompleted_todos
+{% endblock title %}
+
+
+{{subtask_list}}
+
+{% block content %}
+<h1>Unompleted Todos</h1>
+    <ul>
+        {% for subtask in uncompleted_todos %}
+            <li>{{ subtask.title }}</li>
+        {% empty %}
+            <li>No uncompleted todos yet.</li>
+        {% endfor %}
+    </ul>
+ 
+
+{% endblock content %}
