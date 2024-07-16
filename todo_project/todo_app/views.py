@@ -33,8 +33,7 @@ def create(request):
         todo_list = Todos.objects.filter(user=request.user)
         return render(request, "todo_app/create.html", {'todo_list': todo_list})
 
-def about(request):
-    return render(request,"todo_app/about.html")
+
 
 def delete(request,Todos_id):
     todo = Todos.objects.get(pk=Todos_id)
@@ -63,7 +62,7 @@ def update(request,Todos_id):
 
     else:  
 
-        todo_list = Todos.objects.all()
+        todo_list = Todos.objects.get(pk = Todos_id)
         return render(request,"todo_app/update.html",{'todo_list': todo_list})
 
 @login_required

@@ -68,7 +68,7 @@ def update(request,Subtask_id):
 
     else:  
 
-        subtask_list = Subtask.objects.filter(todo_id= Todos_id)
+        subtask_list = Subtask.objects.get(pk = Subtask_id)
         return render(request,"subtask_app/update.html",{'subtask_list': subtask_list})
 
 ''' 
