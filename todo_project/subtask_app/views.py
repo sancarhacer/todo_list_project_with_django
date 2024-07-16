@@ -28,14 +28,49 @@ def createTask(request,Todos_id):
             todo = Todos.objects.get(pk = Todos_id)
             Subtask.objects.create( todo = todo, title=title,description = description,finished = finished,date=date)
             subtask_list = Subtask.objects.filter(todo_id = Todos_id)    
-            return render(request,"subtask_app/subtaskList.html",{'subtask_list': subtask_list, 'Todos_id':Todos_id})
+            return redirect('detailTask', Todos_id=Todos_id)
             
     else:
         
         subtask_list = Subtask.objects.filter(todo_id = Todos_id)           
         return render(request,'subtask_app/create.html',{'subtask_list':subtask_list})
+
+
+def delete(request,Subtask_id):    
+    subtask = Subtask.objects.get(pk=Subtask_id)
+    Todos_id=subtask.todo_id
+    subtask.delete()
+    return redirect('detailTask', Todos_id=Todos_id)
+    
+def yes_finish(request,Subtask_id):
+    subtask = Subtask.objects.get(pk=Subtask_id)
+    Todos_id=subtask.todo_id
+    subtask.finished = False
+    subtask.save()
+    return redirect("detailTask",Todos_id=Todos_id)
+
+def no_finish(request,Subtask_id):
+    subtask = Subtask.objects.get(pk=Subtask_id)
+    Todos_id=subtask.todo_id
+    subtask.finished = True
+    subtask.save()
+    return redirect("detailTask",Todos_id=Todos_id)
+
+def update(request,Subtask_id):
+    subtask = Subtask.objects.get(pk=Subtask_id)
+    Todos_id=subtask.todo_id
+    if request.method == "POST":
         
-   
+        form = SubtaskForm(request.POST or None, instance = subtask)
+        if form.is_valid:
+            form.save()
+            return redirect("detailTask", Todos_id=Todos_id)
+
+    else:  
+
+        subtask_list = Subtask.objects.filter(todo_id= Todos_id)
+        return render(request,"subtask_app/update.html",{'subtask_list': subtask_list})
+
 ''' 
 def createTask(request):
    

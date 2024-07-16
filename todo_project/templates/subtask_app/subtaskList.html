@@ -9,6 +9,7 @@ subtask
 
 {% block content %}
 <table class="table">
+<h1>{{todo_title}} </h1>  
   <thead>
     <tr>
       <th scope="col">Tasks</th>
@@ -21,38 +22,42 @@ subtask
   </thead>
   
   <tbody>
+      
+      
     
-
-        {{todo_id}}   
+        
       {% for subtask in subtask_list %}
         
         {% if subtask.finished %}
           <tr>
-          <td><del>{{subtask.title}} <p>{{subtask.todo.title}}</p> </del></td>
-          <td><a class="btn btn-danger" href= "#" role="button" > Yes</a></td>
+          <td><del><p style="text-decoration: line-through;">{{subtask.title}}</p> </del></td>
+          <td><a class="btn btn-danger" href= "{% url  'yes_finishTask' Subtask_id=subtask.id %}" role="button" > Yes</a></td>
           <td>{{todo.date}}</td>
-          <td><a class="btn btn-danger" href= "#" role="button" > Delete</a></td>
-          <td><a class="btn btn-warning" href= "#" role="button" > Update</a></td>
+          <td><a class="btn btn-danger" href= "{% url  'deleteTask' Subtask_id=subtask.id %}" role="button" > Delete</a></td>
+          <td><a class="btn btn-warning" href= "{% url  'updateTask' Subtask_id=subtask.id %}" role="button" > Update</a></td>
+          
           </tr>
         {% else %}
           <tr>
           <td>{{subtask.title}}</td>
-          <td><a class="btn btn-danger" href= "#" role="button" > No</a></td>
+          <td><a class="btn btn-danger" href= "{% url  'no_finishTask' Subtask_id=subtask.id %}" role="button" > No</a></td>
           <td>{{todo.date}}</td>
-          <td><a class="btn btn-danger" href= "#" role="button" > Delete</a></td>
-          <td><a class="btn btn-warning" href= "#" role="button" > Update</a></td>
+          <td><a class="btn btn-danger" href= "{% url  'deleteTask' Subtask_id=subtask.id %}" role="button" > Delete</a></td>
+          <td><a class="btn btn-warning" href= "{% url  'updateTask' Subtask_id=subtask.id %}" role="button" > Update</a></td>
+          
           </tr>
         {% endif %}
       {% endfor %}
+
+      
+      <td><a class="btn btn-success" href="{% url  'createTask' Todos_id %}"> Create Task </a></td>
+      
       
     
   </tbody>
 </table>
   <div class="text-center">
-      <a class="btn btn-success" href="#"> Uncompleted Todos </a>
-      <a class="btn btn-success" href="{% url  'createTask' Todos_id %}"> Create Task </a>
-      <a class="btn btn-success" href="#"> Completed Todos </a>
-      <h1>{{subtask.todo.id}}</h1> 
+     
 
 
  </div>
